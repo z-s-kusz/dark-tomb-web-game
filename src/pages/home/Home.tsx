@@ -1,6 +1,6 @@
 import Card from '@/components/card/Card';
+import { A } from '@solidjs/router';
 import { createSignal } from 'solid-js';
-// import './Home.css';
 
 function Home() {
     const [count, setCount] = createSignal(0);
@@ -9,7 +9,9 @@ function Home() {
         <>
             <div> hello there lets make some clickable elements to start</div>
             <button onClick={() => setCount(count() + 1)}>clicked: {count()}</button>
-            <Card />
+            <A href="/about">About</A>
+            <A href="/card-builder">Card Builder</A>
+            <Card onClick={() => {}} />
         </>
     );
 }
