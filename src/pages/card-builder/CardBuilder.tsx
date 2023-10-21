@@ -24,20 +24,34 @@ const brown = colors.amber[950];
 const white = '#fff';
 const black = '#000';
 
+type Selection = {
+    type: string;
+    value: any;
+};
+
 export default function CardBuilder() {
     const [scafolding, setScafolding] = createSignal(buildDefaultScafolding());
-    const [selectedItem, setSelectedItem] = createSignal<string | null>(null);
+    const [selectedItem, setSelectedItem] = createSignal<Selection | null>(null);
 
     const handleCardClick = (cardIndex: number, boxIndex: number) => {
         console.log('in parent', cardIndex, boxIndex);
-        if (!selectedItem()) return;
+        if (!selectedItem()?.type) return;
 
         const nextScafolding = scafolding().map((item, i) => {
             if (boxIndex === i) {
-                return {
-                    ...item,
-                    backgroundColor: selectedItem()!,
-                };
+                const newItem = { ...item };
+                switch (selectedItem()?.type) {
+                    case 'item':
+                        newItem.contains = selectedItem()?.value;
+                        break;
+                    case 'color':
+                        newItem.backgroundColor = selectedItem()?.value;
+                        break;
+                    case 'enemy':
+                        newItem.spawns = selectedItem()?.value;
+                        break;
+                }
+                return newItem;
             }
             return item;
         });
@@ -53,7 +67,7 @@ export default function CardBuilder() {
                     <li>
                         <button
                             class="btn"
-                            onClick={() => setSelectedItem(gray)}
+                            onClick={() => setSelectedItem({ type: 'color', value: gray })}
                             style={{ 'background-color': gray, color: white }}>
                             Stone/Gray
                         </button>
@@ -61,7 +75,7 @@ export default function CardBuilder() {
                     <li>
                         <button
                             class="btn"
-                            onClick={() => setSelectedItem(blue)}
+                            onClick={() => setSelectedItem({ type: 'color', value: blue })}
                             style={{ 'background-color': blue, color: white }}>
                             Water/Blue
                         </button>
@@ -69,7 +83,7 @@ export default function CardBuilder() {
                     <li>
                         <button
                             class="btn"
-                            onClick={() => setSelectedItem(green)}
+                            onClick={() => setSelectedItem({ type: 'color', value: green })}
                             style={{ 'background-color': green, color: black }}>
                             Grass/Green
                         </button>
@@ -77,7 +91,7 @@ export default function CardBuilder() {
                     <li>
                         <button
                             class="btn"
-                            onClick={() => setSelectedItem(yellow)}
+                            onClick={() => setSelectedItem({ type: 'color', value: yellow })}
                             style={{ 'background-color': yellow, color: black }}>
                             Sand/Yellow
                         </button>
@@ -85,7 +99,7 @@ export default function CardBuilder() {
                     <li>
                         <button
                             class="btn"
-                            onClick={() => setSelectedItem(brown)}
+                            onClick={() => setSelectedItem({ type: 'color', value: brown })}
                             style={{ 'background-color': brown, color: white }}>
                             Wood/Brown
                         </button>
@@ -95,14 +109,22 @@ export default function CardBuilder() {
             <div>
                 <h1 class="text-xl">Items:</h1>
                 <ul>
-                    <li>Spoon</li>
+                    <li>
+                        <button class="btn" onClick={() => setSelectedItem({ type: 'item', value: 'spoon' })}>
+                            Spoon
+                        </button>
+                    </li>
                     <li>4-Leaf Clover</li>
                 </ul>
             </div>
             <div>
                 <h1 class="text-xl">Enemies:</h1>
                 <ul>
-                    <li>Bat (rabid)</li>
+                    <li>
+                        <button class="btn" onClick={() => setSelectedItem({ type: 'enemy', value: 'bat' })}>
+                            Bat (rabid)
+                        </button>
+                    </li>
                     <li>Moose (normal)</li>
                 </ul>
             </div>
