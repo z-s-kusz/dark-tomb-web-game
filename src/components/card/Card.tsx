@@ -1,7 +1,6 @@
 import Scafold from '@/types/scafold';
 import './Card.css';
 import GridItem from './GridItem';
-import colors from 'tailwindcss/colors';
 import { mergeProps } from 'solid-js';
 
 interface Props {

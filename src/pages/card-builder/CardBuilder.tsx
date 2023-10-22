@@ -57,8 +57,19 @@ export default function CardBuilder() {
         setScafolding(nextScafolding);
     };
 
+    const exportCard = () => {
+        console.log('card --------');
+        console.log(scafolding());
+        console.log('--------------');
+    };
+
     return (
         <main>
+            <div>
+                <button class="btn" onClick={() => exportCard()}>
+                    Export/Log Card
+                </button>
+            </div>
             <Card scafolding={scafolding()} onClick={handleCardClick} />
             <div>
                 <h1 class="text-xl">Tiles/Colors:</h1>
