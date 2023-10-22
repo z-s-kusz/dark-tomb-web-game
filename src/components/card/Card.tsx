@@ -5,21 +5,21 @@ import colors from 'tailwindcss/colors';
 import { mergeProps } from 'solid-js';
 
 interface Props {
-    scafolding?: Scafold[];
-    onClick: (cardIndex: number, boxIndex: number) => void; // will this NEED to be added in merged props?
+    scafolding: Scafold[];
+    onClick: (cardIndex: number, boxIndex: number) => void;
+    cardIndex?: number;
 }
 function Card(props: Props) {
-    const merged = mergeProps({ scafolding: [] }, props);
+    const merged = mergeProps({ cardIndex: 0 }, props);
 
     const handleClick = (index: number) => {
-        props.onClick(100, index); // TODO put real card index here
+        props.onClick(merged.cardIndex, index);
     };
 
     const items = () => {
         let collection = [];
         for (let i = 0; i < 49; i++) {
-            const color = merged.scafolding.length >= 49 ? merged.scafolding[i].backgroundColor : colors.green[200];
-            collection.push(<GridItem color={color} onClick={() => handleClick(i)} />);
+            collection.push(<GridItem onClick={() => handleClick(i)} scafolding={props.scafolding[i]} />);
         }
         return collection;
     };

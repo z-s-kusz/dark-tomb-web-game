@@ -1,4 +1,3 @@
-import Card from '@/components/card/Card';
 import { A } from '@solidjs/router';
 import { createSignal } from 'solid-js';
 
@@ -11,7 +10,6 @@ function Home() {
             <button onClick={() => setCount(count() + 1)}>clicked: {count()}</button>
             <A href="/about">About</A>
             <A href="/card-builder">Card Builder</A>
-            <Card onClick={() => {}} />
         </>
     );
 }

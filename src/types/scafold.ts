@@ -1,7 +1,12 @@
+export type Content = {
+    type: string;
+    value: any;
+}
+
 type Scafold = {
     backgroundColor: string;
     spawns: string | null;
-    contains: string[];
+    contains: Content[];
     isHighlighted: boolean;
 }
 

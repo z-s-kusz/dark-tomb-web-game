@@ -34,7 +34,6 @@ export default function CardBuilder() {
     const [selectedItem, setSelectedItem] = createSignal<Selection | null>(null);
 
     const handleCardClick = (cardIndex: number, boxIndex: number) => {
-        console.log('in parent', cardIndex, boxIndex);
         if (!selectedItem()?.type) return;
 
         const nextScafolding = scafolding().map((item, i) => {
@@ -42,7 +41,7 @@ export default function CardBuilder() {
                 const newItem = { ...item };
                 switch (selectedItem()?.type) {
                     case 'item':
-                        newItem.contains = selectedItem()?.value;
+                        newItem.contains = [selectedItem()!];
                         break;
                     case 'color':
                         newItem.backgroundColor = selectedItem()?.value;
