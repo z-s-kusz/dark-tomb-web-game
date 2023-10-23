@@ -1,16 +1,18 @@
 import { A } from '@solidjs/router';
-import { createSignal } from 'solid-js';
 
 function Home() {
-    const [count, setCount] = createSignal(0);
-
     return (
-        <>
-            <div> hello there lets make some clickable elements to start</div>
-            <button onClick={() => setCount(count() + 1)}>clicked: {count()}</button>
-            <A href="/about">About</A>
-            <A href="/card-builder">Card Builder</A>
-        </>
+        <main class="p-8 h-full">
+            <A href="/about" class="btn link link-accent">
+                About
+            </A>
+            <A href="/card-builder" class="btn link link-accent">
+                Card Builder
+            </A>
+            <A href="/new-game" class="btn link link-accent">
+                Start New Game
+            </A>
+        </main>
     );
 }
 
