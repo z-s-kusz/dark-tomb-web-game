@@ -1,3 +1,51 @@
-.caracter-card {
+.character-card {
     display: grid;
+    grid-template-columns: repeat(5, 80px);
+    grid-template-rows: repeat(5, 80px);
+    width: fit-content;
+}
+
+.character-image {
+    grid-column: 1 / 2;
+    grid-row: 1 / 6;
+}
+
+.name {
+    grid-column: 2 / 6;
+    grid-row: 1 / 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.attributes {
+    grid-column: 2 / 4;
+    grid-row: 2 / 4;
+}
+
+.actions {
+    grid-column: 4 / 6;
+    grid-row: 2 / 4;
+}
+
+.health {
+    grid-column: 2 / 6;
+    grid-row: 4 / 6;
+
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-pile {
+    display: grid;
+    grid: [stack] 48px / [stack] 48px;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-pile > svg, .grid-pile > p {
+    grid-area: stack;
+    text-align: center;
 }
